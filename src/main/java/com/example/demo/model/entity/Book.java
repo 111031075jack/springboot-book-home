@@ -13,7 +13,7 @@ public class Book {
 	private String title;
 	private Double price;
 	private Integer stock;
-	private Boolean pub;
+	private Boolean published;
 	
 	
 }

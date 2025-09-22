@@ -54,14 +54,23 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDTO updateBook(Integer id, BookDTO bookDTO) throws BookNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		// 1. 確認是否有該筆資料(若無此書籍會拋出例外)
+		findBookById(id);
+		// 2. id 注入到 bookDTO中
+		bookDTO.setId(id);
+		// 3. BookDTO 轉 Book
+		Book book = modelMapper.map(bookDTO, Book.class);
+		// 4. 修改
+		bookDao.update(book);
+		return bookDTO;
 	}
 
 	@Override
 	public void deleteBook(Integer id) throws BookNotFoundException {
-		// TODO Auto-generated method stub
-		
+		// 1. 確認是否有該筆資料(若無此書籍會拋出例外)
+		findBookById(id);
+		// 2. 刪除
+		bookDao.deleteById(id);
 	}
 
 }
